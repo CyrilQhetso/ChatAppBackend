@@ -10,4 +10,12 @@ import lombok.NoArgsConstructor;
 public class PrivateConversationRequest {
 
     private String otherUsername;
+
+	public String getOtherUsername() {
+		return otherUsername;
+	}
+
+	public void setOtherUsername(String otherUsername) {
+		this.otherUsername = otherUsername;
+	}
 }

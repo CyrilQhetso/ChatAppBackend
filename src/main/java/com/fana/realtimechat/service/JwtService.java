@@ -1,7 +1,6 @@
 package com.fana.realtimechat.service;
 
 import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwt;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
@@ -9,7 +8,6 @@ import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
-
 import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;
@@ -50,8 +48,13 @@ public class JwtService {
 
     public boolean validateToken(String token) {
         try {
-            Jwts.parserBuilder().setSigningKey(getSignInKey()).build().parseClaimsJws(token);
-            return true;
+            Claims claims = Jwts.parserBuilder()
+                    .setSigningKey(getSignInKey())
+                    .build()
+                    .parseClaimsJws(token)
+                    .getBody();
+            
+            return !claims.getExpiration().before(new Date());
         } catch (Exception e) {
             return false;
         }
@@ -66,7 +69,7 @@ public class JwtService {
     }
 
     private Key getSignInKey() {
-        byte[] keyBytes =  Decoders.BASE64.decode(secretKey);
+        byte[] keyBytes = Decoders.BASE64.decode(secretKey);
         return Keys.hmacShaKeyFor(keyBytes);
     }
 }

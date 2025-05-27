@@ -13,5 +13,17 @@ import java.util.List;
 public class CreateGroupRequest {
 
     private String name;
-    private List<String> participantUsernames;
+    public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public List<String> getParticipantUsernames() {
+		return participantUsernames;
+	}
+	public void setParticipantUsernames(List<String> participantUsernames) {
+		this.participantUsernames = participantUsernames;
+	}
+	private List<String> participantUsernames;
 }

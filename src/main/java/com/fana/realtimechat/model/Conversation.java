@@ -20,7 +20,47 @@ public class Conversation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
+    public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public boolean isGroupChat() {
+		return isGroupChat;
+	}
+
+	public void setGroupChat(boolean isGroupChat) {
+		this.isGroupChat = isGroupChat;
+	}
+
+	public Set<User> getParticipants() {
+		return participants;
+	}
+
+	public void setParticipants(Set<User> participants) {
+		this.participants = participants;
+	}
+
+	public List<Message> getMessages() {
+		return messages;
+	}
+
+	public void setMessages(List<Message> messages) {
+		this.messages = messages;
+	}
+
+	private String name;
 
     @Column(nullable = false)
     private boolean isGroupChat;
